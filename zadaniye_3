@@ -1,3 +1,6 @@
+//Среда разработки: Atmel Studio 6, язык программирования - С.
+//Скриншот результата выполнения программы в отладчике прикреплен.
+
 #include <avr/io.h>
 
 void Big_endian_to_Little_endian(char *big_endian, char *little_endian);
