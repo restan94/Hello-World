@@ -1,0 +1,93 @@
+//Среда разработки: Atmel Studio 6, язык программирования - С.
+//Скриншот результата выполнения программы в отладчике прикреплен.
+
+#include <avr/io.h>
+
+char Array_to_hex_string(uint8_t *array_input);
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+uint8_t array[8]={0x01,0x23,0x45,0x67,0x89,0xAB,0xCD,0xEF};
+uint8_t array2[16];
+unsigned char string[16];
+unsigned char *u;
+
+
+char Array_to_hex_string(uint8_t *array_input)
+{
+	unsigned char i,m;
+	for (i = 0, m = 0; i < 8; i++, m++)
+	{
+	array2[m] = array[i]>>4;//отсекаем правую тетраду байта
+	m++;
+	array2[m] = array[i]; 
+	array2[m] &= 0b00001111;//отсекаем левую тетраду байта
+	}
+	
+	for (i = 0; i < 16; i++)
+	{
+		switch (array2[i])
+		{
+		case 0x00:
+		string[i] = '0';
+		break;
+		case 0x01:
+		string[i] = '1';
+		break;
+		case 0x02:
+		string[i] = '2';
+		break;
+		case 0x03:
+		string[i] = '3';
+		break;
+		case 0x04:
+		string[i] = '4';
+		break;
+		case 0x05:
+		string[i] = '5';
+		break;
+		case 0x06:
+		string[i] = '6';
+		break;
+		case 0x07:
+		string[i] = '7';
+		break;
+		case 0x08:
+		string[i] = '8';
+		break;
+		case 0x09:
+		string[i] = '9';
+		break;
+		case 0x0A:
+		string[i] = 'A';
+		break;
+		case 0x0B:
+		string[i] = 'B';
+		break;
+		case 0x0C:
+		string[i] = 'C';
+		break;
+		case 0x0D:
+		string[i] = 'D';
+		break;
+		case 0x0E:
+		string[i] = 'E';
+		break;
+		case 0x0F:
+		string[i] = 'F';
+		break;
+		}
+	}
+	return(string[0]);
+}
+
+
+
+int main(void)
+{
+
+	u = Array_to_hex_string(array);
+
+	while(1)
+	{
+		//замкнутый цикл
+	}
+}
